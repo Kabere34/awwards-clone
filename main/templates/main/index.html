@@ -4,7 +4,8 @@
 <div class="container">
   {%for post in posts%}
   {{post.description}}
-  <img src="{{post.image.url}}" alt="{{post.name}}">
+  {{post.name}}
+  <img src="" alt="">
   {%endfor%}
 </div>
 {% endblock %}
