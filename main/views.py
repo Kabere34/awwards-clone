@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect
 from django.contrib.auth import login, authenticate
 
@@ -15,10 +16,24 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('index')
+            return redirect('login')
     else:
         form = SignupForm()
     return render(request, 'registration/signup.html', {'form': form})
+
+def login(request) :
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+          email = form.cleaned_data['email']
+          password = form.cleaned_data['password1']
+          user = authenticate(email=email, password1=password)
+          return redirect('index')
+    else:
+      form = LoginForm()
+    return render(request, 'registration/login.html', {'form': form})
+
+
 
 
 def index(request):
