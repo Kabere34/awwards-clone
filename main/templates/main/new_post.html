@@ -1,0 +1,10 @@
+{%extends 'main/base.html'%}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="post">
+  {% csrf_token %}
+      {{form|crispy}}
+      <input class="btn btn-primary" type="submit">Submit</input>
+  </form>
+{% endblock %}
