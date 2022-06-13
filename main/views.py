@@ -1,6 +1,6 @@
 from multiprocessing import context
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 
@@ -85,4 +85,21 @@ def new_post(request):
 # def profile(request, username):
 #     return render(request, 'profile.html')
 
+def rate_post(request,pk):
+   [design, usability, content]=[[0],[0],[0]]
 
+   post=get_object_or_404(Post, pk=pk)
+   current_user= request.user
+   print(current_user,'heeeyyoo')
+   print(current_user.id,'heeeyyoo2')
+   if request.method == 'POST':
+      form=RatingsForm(request.POST)
+      [design, usability, content] = [[0], [0], [0]]
+      if form.is_valid():
+         form.save()
+         rating-Rating.objects.last()
+         design=rating.design
+         usability=rating.usability
+         content=rating.content
+         rating.post_rated=post
+         rating.save()

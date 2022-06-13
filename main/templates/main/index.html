@@ -3,9 +3,15 @@
 {% block content %}
 <div class="container">
   {%for post in posts%}
-  {{post.description}}
-  {{post.name}}
-  <img src="" alt="">
+
+  <div> {{post.description}}</div>
+  <div> {{post.name}}</div>
+
+
+  {% if post.image %}
+  <img src="{{post.image.url}}" style="max-width:20rem"
+  alt="">
+  {% endif %}
   {%endfor%}
 </div>
 
