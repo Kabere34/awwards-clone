@@ -3,9 +3,12 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .serializer import *
 from .models import *
 from . forms import *
+# from .permissions import IsAdminOrReadOnly
 
 # Create your views here.
 
@@ -110,4 +113,21 @@ def rate_post(request,pk):
          print(post_design_ratings)
          return redirect('homepage')
 
+
+
+
+class Postlist(APIView):
+    def get(self, request, format=None):
+        all_post = Post.objects.all()
+        serializers = PostSerializer(all_post, many=True)
+        return Response(serializers.data)
+
+    def post(self, request, format=None):
+        serializers = PostSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+   #  permission_classes = (IsAdminOrReadOnly,)
 
