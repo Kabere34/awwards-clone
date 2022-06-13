@@ -1,0 +1,30 @@
+{%extends 'main/base.html'%} {% load static %} {% block content %}
+<div class="container">
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="content-section">
+          <div class="media">
+            {{all_users}}
+            {%if current_user.profile.avatar%}
+            <img
+              src="{{current_user.profile.avatar.url}}"
+              alt="Profile"
+              class="img_profile"
+              style="height: 13rem"
+            />
+            {%else%}
+            <img
+              src=""
+              alt="Profile"
+              class="img_profile"
+              style="height: 13rem"
+            />
+            {%endif%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

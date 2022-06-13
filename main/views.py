@@ -1,6 +1,8 @@
+from multiprocessing import context
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.models import User
 
 from .models import *
 from . forms import *
@@ -33,14 +35,13 @@ def login(request) :
       form = LoginForm()
     return render(request, 'registration/login.html', {'form': form})
 
-
-
-
 def index(request):
    posts = Post.objects.all()
+   profile = Profile.objects.all()
    current_user = request.user
    context ={
    "posts":posts ,
+   "profile":profile
    }
    return render(request, 'main/index.html', context)
 
@@ -58,5 +59,30 @@ def new_post(request):
    return render(request, 'main/new_post.html', {"form": form})
 
 
+# def profile(request):
+#   '''
+# 	Method that fetches a users profile page
+# 	'''
+#   current_user =request.user
+#   user=User.objects.all()
+#   profile_image=Profile.objects.filter(user=request.user.pk)
+#   print('hello')
+#   return render(request,"main/profile.html" ,{"profile":profile, "current_user":current_user})
+
+
+# def profile(request):
+#    profile=User.Objects.get(username=username)
+#    try:
+#       profile_info=Profile.get_profile(profile.id)
+#    except:
+#         profile_info = Profile.filter_by_id(profile.id)
+#    posts = Post.get_profile_image(profile.id)
+#    title = f'@{profile.username}'
+#    context={'title':title, 'profile':profile, 'profile_info':profile_info, 'posts':posts}
+#    return render(request, 'main/profile.html',context )
+
+# @login_required(login_url='login')
+# def profile(request, username):
+#     return render(request, 'profile.html')
 
 
