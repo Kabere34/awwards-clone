@@ -20,3 +20,8 @@ class LoginForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('email', 'password1')
+
+class RatingsForm(forms.ModelForm):
+    class Meta:
+        model = Ratings
+        exclude = ['post_rated', 'score']

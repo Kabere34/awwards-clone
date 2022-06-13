@@ -97,9 +97,11 @@ def rate_post(request,pk):
       [design, usability, content] = [[0], [0], [0]]
       if form.is_valid():
          form.save()
-         rating-Rating.objects.last()
+         rating=Ratings.objects.last()
          design=rating.design
          usability=rating.usability
          content=rating.content
          rating.post_rated=post
          rating.save()
+
+         
