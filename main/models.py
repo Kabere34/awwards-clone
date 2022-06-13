@@ -1,11 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
-from tinymce.models import HTMLField
+
 # Create your models here.
 class Profile(models.Model):
     avatar = models.ImageField(upload_to='images/', blank=True)
-    bio = HTMLField()
-    contact = HTMLField()
+    bio = models.TextField(max_length=500, default="My Bio", blank=True)
+    contact = models.EmailField(max_length=100, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
 
     def save_profile(self):
@@ -15,7 +15,7 @@ class Profile(models.Model):
 class Post(models.Model):
     name = models.CharField(max_length=30)
     image = models.ImageField(upload_to='images/', blank=True)
-    description = HTMLField(blank=True)
+    description = models.TextField(max_length=255)
     live_link=models.URLField(blank=True)
     profile=models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     user_profile = models.ForeignKey(User,on_delete=models.CASCADE, related_name='posts',blank=True)
