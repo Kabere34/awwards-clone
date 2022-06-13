@@ -11,6 +11,9 @@ class Profile(models.Model):
     def save_profile(self):
         self.save()
 
+    class Meta:
+        ordering = ['user']
+
 
 class Post(models.Model):
     name = models.CharField(max_length=30)
