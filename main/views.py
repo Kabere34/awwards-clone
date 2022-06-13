@@ -104,4 +104,10 @@ def rate_post(request,pk):
          rating.post_rated=post
          rating.save()
 
-         
+         print (design, usability, content)
+         post_ratings=Ratings.objects.filter(post_rated=post)
+         post_design_ratings=[pr.design for pr in post_ratings]
+         print(post_design_ratings)
+         return redirect('homepage')
+
+

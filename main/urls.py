@@ -13,6 +13,7 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('account/', include('django.contrib.auth.urls')),
     # path('profile/', views.profile, name='profile'),
+    path('rate/(?P<pk>\d+)', views.rate_post, name='rate_post'),
 
 ]
 if settings.DEBUG:

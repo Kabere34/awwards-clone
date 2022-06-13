@@ -6,7 +6,7 @@ class Profile(models.Model):
     avatar = models.ImageField(upload_to='images/', blank=True)
     bio = models.TextField(max_length=500, default="My Bio", blank=True)
     contact = models.EmailField(max_length=100, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    user = models.OneToOneField(User,primary_key=True, on_delete=models.CASCADE, blank=True)
 
     def save_profile(self):
         self.save()
