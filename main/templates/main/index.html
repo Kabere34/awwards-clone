@@ -1,24 +1,35 @@
 {%extends 'main/base.html'%}
 {% load static %}
 {% block content %}
-<div class="container">
-  {%for post in posts%}
+<div class="hero">heey</div>
+<!-- card -->
+<div class="container-fluid">
+{%for post in posts%}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col-4">
+    <div class="card h-100">
 
-  <div> {{post.description}}</div>
-  <div> {{post.name}}</div>
+      {% if post.image %}
+      <img src="{{post.image.url}}" class="card-img-top" alt="Skyscrapers"/>
+      {% endif %}
+      <div class="card-body">
+        <h5 class="card-title"><button>view</button></h5>
+        <p class="card-text">
 
+        </p>
+        <div class="card-footer bg-white">
 
-  {% if post.image %}
-  <img src="{{post.image.url}}" style="max-width:20rem"
-  alt="">
-  {% endif %}
-  {%endfor%}
+          <small class="text-muted " >{{post.description}}</small>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-4"></div>
+  <div class="col-4"></div>
 </div>
+{%endfor%}
 
-<div class="container">
-  {%for prof in profile%}
-  {{prof.bio}}
-
-  {%endfor%}
+</div>
 </div>
 {% endblock %}
