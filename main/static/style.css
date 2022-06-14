@@ -1,3 +1,9 @@
-body{
-  background-color: rgb(40, 124, 96);
+
+.hero-section{
+  background-image: url("./images/hero.jpg");
+  height: 500px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+
 }

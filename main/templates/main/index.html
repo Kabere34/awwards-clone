@@ -1,13 +1,19 @@
+
+
+
+
 {%extends 'main/base.html'%}
+{% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
-<div class="hero">heey</div>
+<div class="hero-section">heey</div>
 <!-- card -->
 <div class="container-fluid">
+  <div class="container">
 {%for post in posts%}
 <div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col-4">
-    <div class="card h-100">
+  <div class="col-md">
+    <div class="card">
 
       {% if post.image %}
       <img src="{{post.image.url}}" class="card-img-top" alt="Skyscrapers"/>
@@ -25,10 +31,15 @@
 
     </div>
   </div>
-  <div class="col-4"></div>
-  <div class="col-4"></div>
+  <div class="col-md"></div>
+  <div class="col-md"></div>
+</div>
 </div>
 {%endfor%}
+
+
+
+
 
 </div>
 </div>
