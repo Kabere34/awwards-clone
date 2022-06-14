@@ -41,7 +41,7 @@ def login(request) :
 def index(request):
    posts = Post.objects.all()
    profile = Profile.objects.all()
-   current_user = request.user
+
    context ={
    "posts":posts ,
    "profile":profile
@@ -71,6 +71,28 @@ def profile(request):
   profile_image=Profile.objects.filter(user=request.user.pk)
   print('hello')
   return render(request,"main/profile.html" ,{"profile":profile, "current_user":current_user})
+
+def user_profile(request,user_id):
+  user=get_object_or_404(User,id=user_id)
+  return render(request,"main/profile.html" ,{"profile":profile, "current_user":user})
+
+def profile_edit(request,user_id):
+   user=get_object_or_404(User,id=user_id)
+   user = User.objects.first()
+   form=NewProfileForm()
+   if request.method == 'POST':
+      form=NewProfileForm(request.POST,request.FILES)
+      if form.is_valid():
+         image=form.save(commit=False)
+         image.user=user
+         form.save()
+         return redirect('profile')
+      else:
+         form=NewProfileForm()
+   return render(request,'main/profile_edit.html',{"form":form})
+
+
+
 
 
 # def profile(request):

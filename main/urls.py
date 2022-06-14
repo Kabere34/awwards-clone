@@ -13,6 +13,8 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('account/', include('django.contrib.auth.urls')),
     path('profile/', views.profile, name='profile'),
+    path('user_profile/<int:user_id>', views.user_profile, name='user_profile'),
+    path('profile_edit/<int:user_id>', views.profile_edit, name='profile-edit'),
     # path('rate/(?P<pk>\d+)', views.rate_post, name='rate_post'),
     path('api/posts/', views.Postlist.as_view()),
 

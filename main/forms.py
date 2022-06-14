@@ -21,6 +21,11 @@ class LoginForm(UserCreationForm):
         model = User
         fields = ('email', 'password1')
 
+class NewProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ['user']
+
 class RatingsForm(forms.ModelForm):
     class Meta:
         model = Ratings
