@@ -62,15 +62,15 @@ def new_post(request):
    return render(request, 'main/new_post.html', {"form": form})
 
 
-# def profile(request):
-#   '''
-# 	Method that fetches a users profile page
-# 	'''
-#   current_user =request.user
-#   user=User.objects.all()
-#   profile_image=Profile.objects.filter(user=request.user.pk)
-#   print('hello')
-#   return render(request,"main/profile.html" ,{"profile":profile, "current_user":current_user})
+def profile(request):
+  '''
+	Method that fetches a users profile page
+	'''
+  current_user =request.user
+  user=User.objects.all()
+  profile_image=Profile.objects.filter(user=request.user.pk)
+  print('hello')
+  return render(request,"main/profile.html" ,{"profile":profile, "current_user":current_user})
 
 
 # def profile(request):

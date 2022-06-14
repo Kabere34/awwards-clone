@@ -3,15 +3,16 @@
   <div class="jumbotron">
     <div class="row">
       <div class="col-md-4">
-        <div class="content-section">
+        <div class="content-section" >
           <div class="media">
-            {{all_users}}
+            <div class="profile-media" align="center">
+
             {%if current_user.profile.avatar%}
-            <img
+            <img class="rounded-circle border-ml-3 mt-2 mr-3"
               src="{{current_user.profile.avatar.url}}"
               alt="Profile"
               class="img_profile"
-              style="height: 13rem"
+              style="height: 80px; width: 80px"
             />
             {%else%}
             <img
@@ -21,7 +22,11 @@
               style="height: 13rem"
             />
             {%endif%}
+            <div class="mt-2"> <strong>{{current_user.username}}</strong></div>
           </div>
+
+          </div>
+
         </div>
       </div>
     </div>
