@@ -79,8 +79,7 @@ def user_profile(request,user_id):
   return render(request,"main/profile.html" ,{"profile":profile, "current_user":user})
 
 def profile_edit(request,user_id):
-   user=get_object_or_404(User,id=user_id)
-   user = User.objects.first()
+   user= request.user
    form=NewProfileForm()
    if request.method == 'POST':
       form=NewProfileForm(request.POST,request.FILES)
@@ -92,32 +91,6 @@ def profile_edit(request,user_id):
       else:
          form=NewProfileForm()
    return render(request,'main/profile_edit.html',{"form":form})
-
-
-# def single_post(request, post_id):
-#     post = Post.objects.get(id=post_id)
-#    #  profile = Profile.objects()
-#     ratings = Ratings.objects.all()
-#     current_user = request.user
-#     if request.method == 'POST':
-#         form = RatingsForm(request.POST, request.FILES)
-
-#         if form.is_valid():
-#             comment = form.save(commit=False)
-#             comment.user = current_user
-#             comment.save()
-#         return redirect('index')
-
-#     else:
-#         form = RatingsForm
-#     context = {
-#         "profile": profile,
-#         "form": form,
-#         "post": post,
-#         "ratings": ratings,
-#         "post_id": post.id,
-#     }
-#     return render (request, 'main/single_post.html', context)
 
 
 def rate_post(request,pk):

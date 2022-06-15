@@ -1,92 +1,67 @@
 {% load crispy_forms_tags %}
 <html>
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-.dropbtn {
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .dropbtn {
 
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-}
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+    }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
 
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
 
-.dropdown-content a:hover {background-color: #ddd;}
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    }
 
-.dropdown:hover .dropdown-content {display: block;}
-
-
-</style>
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  </style>
 </head>
+
 <body>
 
-
-
-<!-- <div class="dropdown">
-  <button class="dropbtn">Dropdown</button>
-  <div class="dropdown-content">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
-  </div>
-</div> -->
-
 </body>
+
 </html>
 <!-- end -->
-<nav
-  class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"
-  id="nbar"
->
+<nav class="navbar fixed-top navbar-expand-lg scrolling-navbar text-white" id="nbar"
+  style="background-color:black; height:5rem;">
   <div class="container">
     <a class="navbar-brand" href="{% url 'index' %}">
-      <strong class="mr-4 brand"> Awwwards</strong></a
-    >
-    <!-- <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button> -->
+      <strong class="mr-4 brand text-white"> Awwwards</strong></a>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <form class="form-inline" method="get" action="">
             {% csrf_token %}
             <div class="md-form my-0">
-              <input
-                class="form-control mr-sm-2"
-                type="text"
-                placeholder="Search"
-                name="title"
-                aria-label="Search"
-              />
+              <input class="form-control mr-sm-2" type="text" placeholder="Search" name="title" aria-label="Search" />
             </div>
           </form>
         </li>
@@ -96,13 +71,9 @@
         {% if user.is_authenticated%}
         <div class="dropdown">
 
-          <img
-          class="dropbtn rounded-circle nav-img"
-          src="{{ user.profile.avatar.url }}"
-          alt=""
-          style="height: 80px; width: 80px"
-        />
-        
+          <img class="dropbtn rounded-circle nav-img" src="{{ user.profile.avatar.url }}" alt=""
+            style="height: 80px; width: 80px" />
+
           <div class="dropdown-content">
             <a href="{% url 'profile' %}">Profile</a>
             <a href="{% url 'profile_edit' user.id %}">Settings</a>
@@ -115,14 +86,10 @@
           REGISTER/LOGIN
         </a>
         {% endif %}
-        <a href="{% url 'new_post' %}"><button
-          class="btn btn-info btn-sm"
-          id="site"
-          data-toggle="modal"
-          data-target=".bd-example-modal-xl"
-        >
-          Submit your site
-        </button></a>
+        <a href="{% url 'new_post' %}">
+          <button class="btn btn-info btn-sm mt-4 fw-light" id="site">
+            Submit your site
+          </button></a>
 
 
 
@@ -130,4 +97,3 @@
     </div>
   </div>
 </nav>
-
