@@ -6,7 +6,7 @@ body { padding-top: 70px;
     body { padding-top: 0px; }
 }
 .hero-section{
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url("./images/hero3m.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url("./images/hero3m.jpg");
   height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;

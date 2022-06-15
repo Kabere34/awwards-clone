@@ -177,6 +177,35 @@ def single_post(request, post_id):
     }
     return render (request, 'main/single_post.html',context)
 
+
+
+# def search_results(request):
+#    post= Post.objects.all()
+#    query=request.GET.get('query')
+#    if query:
+#       image=Post.objects.filter( Q(name__icontains=query))
+#       # profile=Profile.objects.filter( Q(user__username__icontains=query) )
+#       params = {
+#           'image': image,
+
+#           'post':post
+#       }
+#       return render(request, 'main/search.html', params)
+
+def search_results(request):
+
+    if 'search' in request.GET and request.GET["search"]:
+        search_term = request.GET.get("search")
+        searched_post = Post.search_by_name(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'main/search.html',{"message":message,"searched_post": searched_post})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'main/search.html',{"message":message})
+
+
 class Postlist(APIView):
     def get(self, request, format=None):
         all_post = Post.objects.all()
@@ -192,18 +221,23 @@ class Postlist(APIView):
 
    #  permission_classes = (IsAdminOrReadOnly,)
 
-def search_results(request):
-   post= Post.objects.all()
-   query=request.GET.get('query')
-   if query:
-      image=Post.objects.filter( Q(name__icontains=query))
-      # profile=Profile.objects.filter( Q(user__username__icontains=query) )
-      params = {
-          'image': image,
 
-          'post':post
-      }
-      return render(request, 'main/search.html', params)
+# class Profilelist(APIView):
+#     def get(self, request, format=None):
+#         all_profiles = Profile.objects.all()
+#         serializers = PostSerializer(all_profiles, many=True)
+#         return Response(serializers.data)
 
+   #  def post(self, request, format=None):
+   #      serializers = ProfileSerializer(data=request.data)
+   #      if serializers.is_valid():
+   #          serializers.save()
+   #          return Response(serializers.data, status=status.HTTP_201_CREATED)
+   #      return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+   #  permission_classes = (IsAdminOrReadOnly,)
+class Profilelist(APIView):
+    def get(self, request, format=None):
+        all_profiles = Profile.objects.all()
+        serializers = ProfileSerializer(all_profiles, many=True)
+        return Response(serializers.data)

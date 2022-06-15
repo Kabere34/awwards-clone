@@ -19,6 +19,7 @@ urlpatterns = [
     path('search_results/', views.search_results, name='search_results'),
     path('rate/<pk>', views.rate_post, name='rate_post'),
     path('api/posts/', views.Postlist.as_view()),
+    path('api/profile/', views.Profilelist.as_view()),
 
 ]
 if settings.DEBUG:

@@ -10,10 +10,10 @@ from .models import *
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
       model=Post
-      fields=('id','name', 'image', 'description', 'live_link')
+      fields=('id','name', 'image', 'description', 'live_link','profile','user_profile')
 
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
-      model=Post
+      model=Profile
       fields=('avatar','bio','contact')
