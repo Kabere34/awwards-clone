@@ -150,7 +150,7 @@ def rate_post(request,pk):
          return redirect('index')
    else:
       form = RatingsForm()
-      return render(request,'main/index.html',{"user":current_user,"ratings_form":form})
+      return render(request,'main/single_post.html',{"user":current_user,"ratings_form":form})
 
 def single_post(request, post_id):
     post = Post.objects.get(id=post_id)
@@ -197,10 +197,10 @@ def search_results(request):
    query=request.GET.get('query')
    if query:
       image=Post.objects.filter( Q(name__icontains=query))
-      profile=Profile.objects.filter( Q(user__username__icontains=query) )
+      # profile=Profile.objects.filter( Q(user__username__icontains=query) )
       params = {
           'image': image,
-          'profile': profile,
+
           'post':post
       }
       return render(request, 'main/search.html', params)

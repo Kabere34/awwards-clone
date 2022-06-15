@@ -16,6 +16,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('user_profile/<int:user_id>', views.user_profile, name='user_profile'),
     path('profile_edit/<int:user_id>', views.profile_edit, name='profile_edit'),
+    path('search_results/', views.search_results, name='search_results'),
     path('rate/<pk>', views.rate_post, name='rate_post'),
     path('api/posts/', views.Postlist.as_view()),
 

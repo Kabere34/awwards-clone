@@ -70,26 +70,28 @@
       <ul class="navbar-nav navbar-right">
         {% if user.is_authenticated%}
         <div class="dropdown">
+        <div>
 
-          <img class="dropbtn rounded-circle nav-img" src="{{ user.profile.avatar.url }}" alt=""
+            <img class="dropbtn rounded-circle nav-img" src="{{ user.profile.avatar.url }}" alt=""
             style="height: 80px; width: 80px" />
+
+        </div>
 
           <div class="dropdown-content">
             <a href="{% url 'profile' %}">Profile</a>
-            <a href="{% url 'profile_edit' user.id %}">Settings</a>
+            <a href="{% url 'profile_edit' user.id %}">Edit Profile</a>
             <a href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
           </div>
         </div>
 
         {% else %}
         <a href="{% url 'login' %}" class="login btn btn-sm btn-info">
-          REGISTER/LOGIN
+          REGISTER
         </a>
         {% endif %}
-        <a href="{% url 'new_post' %}">
-          <button class="btn btn-info btn-sm mt-4 fw-light" id="site">
-            Submit your site
-          </button></a>
+        <button class="btn-info btn-sm mt-4 fw-light" id="site" style="height: 2rem; border:none;"><a
+            href="{% url 'new_post' %}"></a>Submit Your Site</button>
+
 
 
 
