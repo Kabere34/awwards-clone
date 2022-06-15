@@ -1,0 +1,51 @@
+{%extends 'main/base.html'%}
+{% load crispy_forms_tags %}
+{%block content%}
+<div class="container" id="content">
+<div class="card mt-3" align="center">
+  <img src="{{post.image.url}}" style="width: 70%;"
+  class="card-img-top" alt="Wild Landscape"/>
+  <div class="card-body">
+    <div class="container">
+      <div class="col-md-6">
+
+    <p class="card-text">
+      <form  method="post" enctype="multipart/form-data" action="{%url 'rate_post' pk=post.id%}" >
+        {% csrf_token %}
+            {{form|crispy}}
+            <input class="btn btn-primary" type="submit" value="Post">
+        </form>
+    </p>
+  </div>
+  </div>
+    <p class="card-text">
+      <small class="text-muted">Last updated 3 mins ago</small>
+    </p>
+  </div>
+</div>
+<a style="width:100%;padding-left:0;" href="{{post.live_link}}" target="_blank"> <p id="text">view live project</p></a>
+         <p id="text" >Total ratings: {{post.ratings.count}}
+         {% for rating in ratings%}
+
+ {% if forloop.counter is ratings.count %}
+                   <span style="padding-left:6px;" > Design: {{rating.design}}</span>
+                            <span style="padding-left:6px;" > Usability: {{rating.usability}}</span>
+                                     <span style="padding-left:6px;padding-right:36px;" > Content: {{rating.content}}</span></p>
+
+
+                            <p style="font-size:28px"> Score: {{rating.score}}</p>
+
+ {% endif %}
+
+         {% endfor %}
+</div>
+
+
+
+
+
+
+
+
+
+{%endblock%}
