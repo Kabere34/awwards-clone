@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from .serializer import *
 from .models import *
 from . forms import *
+from django.db.models import Q
 # from .permissions import IsAdminOrReadOnly
 
 # Create your views here.
@@ -190,4 +191,19 @@ class Postlist(APIView):
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
    #  permission_classes = (IsAdminOrReadOnly,)
+
+def search_results(request):
+   post= Post.objects.all()
+   query=request.GET.get('query')
+   if query:
+      image=Post.objects.filter( Q(name__icontains=query))
+      profile=Profile.objects.filter( Q(user__username__icontains=query) )
+      params = {
+          'image': image,
+          'profile': profile,
+          'post':post
+      }
+      return render(request, 'main/search.html', params)
+
+
 
