@@ -8,5 +8,9 @@ body { padding-top: 70px; }
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
+}
+#content{
+  width: 80%;
+  margin: auto;
 
 }

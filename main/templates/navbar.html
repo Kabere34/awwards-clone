@@ -61,9 +61,9 @@
 >
   <div class="container">
     <a class="navbar-brand" href="{% url 'index' %}">
-      <strong class="mr-4 brand"> Awwards</strong></a
+      <strong class="mr-4 brand"> Awwwards</strong></a
     >
-    <button
+    <!-- <button
       class="navbar-toggler"
       type="button"
       data-toggle="collapse"
@@ -73,7 +73,7 @@
       aria-label="Toggle navigation"
     >
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
@@ -95,61 +95,21 @@
       <ul class="navbar-nav navbar-right">
         {% if user.is_authenticated%}
         <div class="dropdown">
+
           <img
           class="dropbtn rounded-circle nav-img"
           src="{{ user.profile.avatar.url }}"
           alt=""
-          height="50px"
+          style="height: 80px; width: 80px"
         />
+        
           <div class="dropdown-content">
             <a href="{% url 'profile' %}">Profile</a>
             <a href="{% url 'profile_edit' user.id %}">Settings</a>
-            <a href="#">Link 3</a>
+            <a href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
           </div>
         </div>
 
-
-
-        <!-- <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            id="navbarDropdownMenuLink"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            >{{ user.username|title }}
-
-            <img
-              class="rounded-circle nav-img"
-              src="{{ user.profile.avatar.url }}"
-              alt=""
-              height="50px"
-            />
-          </a>
-          <div
-            class="dropdown-menu dropdown-primary"
-            aria-labelledby="navbarDropdownMenuLink"
-          >
-            <a
-              class="dropdown-item text-center"
-              href="{% url 'profile'  %}"
-              >Profile</a
-            >
-            <hr />
-            <a
-              class="dropdown-item text-center"
-              href="#"
-            >
-              Edit profile</a
-            >
-            <hr />
-            <a
-              href="{% url 'logout' %}"
-              class="text-secondary text-center dropdown-item"
-              >Log Out</a
-            >
-          </div>
-        </li> -->
         {% else %}
         <a href="{% url 'login' %}" class="login btn btn-sm btn-info">
           REGISTER/LOGIN

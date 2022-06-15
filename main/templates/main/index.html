@@ -1,41 +1,51 @@
-
-
-
-
 {%extends 'main/base.html'%}
 {% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
 <div class="hero-section">heey</div>
 <!-- card -->
+
 <div class="container-fluid">
   <div class="container">
-{%for post in posts%}
-<div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col-md">
-    <div class="card">
+    {%for post in posts%}
+    <div class="row row-cols-1 row-cols-md-3 g-4">
 
-      {% if post.image %}
-      <img src="{{post.image.url}}" class="card-img-top" alt="Skyscrapers"/>
-      {% endif %}
-      <div class="card-body">
-        <h5 class="card-title"><button>view</button></h5>
-        <p class="card-text">
+      <div class="col-sm-6 col-md-4">
+        <div class="card">
 
-        </p>
-        <div class="card-footer bg-white">
+          {% if post.image %}
+          <img src="{{post.image.url}}" class="card-img-top" alt="Skyscrapers" />
+          {% endif %}
+          <div class="card-body">
+            <span style="display:flex;flex-direction:row; justify-content:space-around;width:60%; justify-content:baseline;">
+              <a href="{%url 'single_post' post.id %}">
+                <p>{{post.name}}</p>
+              </a>
+              <button type="button" class="btn-outline-info pt-1 pb-1"><a
+                href="{{post.live_link}}">view</a></button>
+              </span>
 
-          <small class="text-muted " >{{post.description}}</small>
+            <p class="card-text">
+            </p>
+            <div class="card-footer bg-white">
+
+
+              <!-- <small class="text-muted " >{{post.description}}</small> -->
+              <p class="card-text "><img class="rounded-circle nav-img" style="height: 30px; width: 30px"
+                  src="{{post.user_profile.profile.avatar.url}}" class="nav-img mr-2" alt="">
+                By {{post.user_profile.username}} <span style="float:right">{{post.date|date}}</span>
+
+
+              </p>
+
+
+            </div>
+          </div>
         </div>
       </div>
-
     </div>
   </div>
-  <div class="col-md"></div>
-  <div class="col-md"></div>
-</div>
-</div>
-{%endfor%}
+  {%endfor%}
 
 
 

@@ -41,10 +41,12 @@ def login(request) :
 def index(request):
    posts = Post.objects.all()
    profile = Profile.objects.all()
-
+   ratings=Ratings.objects.all()
+   current_user = request.user
    context ={
    "posts":posts ,
-   "profile":profile
+   "profile":profile,
+   "ratings":ratings,
    }
    return render(request, 'main/index.html', context)
 
@@ -92,23 +94,31 @@ def profile_edit(request,user_id):
    return render(request,'main/profile_edit.html',{"form":form})
 
 
+# def single_post(request, post_id):
+#     post = Post.objects.get(id=post_id)
+#    #  profile = Profile.objects()
+#     ratings = Ratings.objects.all()
+#     current_user = request.user
+#     if request.method == 'POST':
+#         form = RatingsForm(request.POST, request.FILES)
 
+#         if form.is_valid():
+#             comment = form.save(commit=False)
+#             comment.user = current_user
+#             comment.save()
+#         return redirect('index')
 
+#     else:
+#         form = RatingsForm
+#     context = {
+#         "profile": profile,
+#         "form": form,
+#         "post": post,
+#         "ratings": ratings,
+#         "post_id": post.id,
+#     }
+#     return render (request, 'main/single_post.html', context)
 
-# def profile(request):
-#    profile=User.Objects.get(username=username)
-#    try:
-#       profile_info=Profile.get_profile(profile.id)
-#    except:
-#         profile_info = Profile.filter_by_id(profile.id)
-#    posts = Post.get_profile_image(profile.id)
-#    title = f'@{profile.username}'
-#    context={'title':title, 'profile':profile, 'profile_info':profile_info, 'posts':posts}
-#    return render(request, 'main/profile.html',context )
-
-# @login_required(login_url='login')
-# def profile(request, username):
-#     return render(request, 'profile.html')
 
 def rate_post(request,pk):
    [design, usability, content]=[[0],[0],[0]]
@@ -133,10 +143,65 @@ def rate_post(request,pk):
          post_ratings=Ratings.objects.filter(post_rated=post)
          post_design_ratings=[pr.design for pr in post_ratings]
          print(post_design_ratings)
-         return redirect('homepage')
+         design_avg=0
+         for value in post_design_ratings:
+                design_avg += value
+         print (design_avg/len(post_design_ratings))
+         design_score= (design_avg/len(post_design_ratings))
+
+         post_usability_ratings = [pr.usability for pr in post_ratings]
+         print (post_usability_ratings)
+         usability_avg=0
+         for value in post_usability_ratings:
+               usability_avg += value
+         print (usability_avg/len(post_usability_ratings))
+         usability_score= (usability_avg/len(post_usability_ratings))
+         post_content_ratings = [pr.content for pr in post_ratings]
+         print (post_content_ratings)
+         content_avg = 0
+         for value in post_content_ratings:
+                content_avg += value
+         print (content_avg / len(post_content_ratings))
+         content_score = (content_avg / len(post_content_ratings))
 
 
+         score =(design_score + usability_score + content_score)/3
 
+         rating.score =score
+         rating.save()
+
+         score=rating.score
+         print ("last score=" + str(score))
+
+         return redirect('index')
+   else:
+      form = RatingsForm()
+      return render(request,'main/index.html',{"user":current_user,"ratings_form":form})
+
+def single_post(request, post_id):
+    post = Post.objects.get(id=post_id)
+    profile = Profile.objects.all()
+    ratings = Ratings.objects.all()
+    current_user = request.user
+    if request.method == 'POST':
+        form = RatingsForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = current_user
+            comment.save()
+        return redirect('index')
+
+    else:
+        form = RatingsForm
+    context = {
+        "profile": profile,
+        "form": form,
+        "post": post,
+        "ratings": ratings,
+        'post_id': post.id,
+    }
+    return render (request, 'main/single_post.html',context)
 
 class Postlist(APIView):
     def get(self, request, format=None):
