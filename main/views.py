@@ -51,6 +51,7 @@ def index(request):
    }
    return render(request, 'main/index.html', context)
 
+@login_required(login_url='login')
 def new_post(request):
    current_user=request.user
    if request.method == 'POST':
@@ -64,21 +65,25 @@ def new_post(request):
       form=UploadForm()
    return render(request, 'main/new_post.html', {"form": form})
 
+# @login_required(login_url='login')
+# def profile(request):
+#   '''
+# 	Method that fetches a users profile page
+# 	'''
+#   current_user =request.user
+#   user=User.objects.all()
+#   profile_image=Profile.objects.filter(user=request.user.pk)
+#   print('hello')
+#   return render(request,"main/profile.html" ,{"profile":profile, "current_user":current_user})
 
-def profile(request):
-  '''
-	Method that fetches a users profile page
-	'''
-  current_user =request.user
-  user=User.objects.all()
-  profile_image=Profile.objects.filter(user=request.user.pk)
-  print('hello')
-  return render(request,"main/profile.html" ,{"profile":profile, "current_user":current_user})
+def user_profile(request):
+  user=request.user
+  posts=Post.objects.filter(user_profile=user)
 
-def user_profile(request,user_id):
-  user=get_object_or_404(User,id=user_id)
-  return render(request,"main/profile.html" ,{"profile":profile, "current_user":user})
 
+  return render(request,"main/profile.html" ,{ "current_user":user,"posts":posts})
+
+@login_required(login_url='login')
 def profile_edit(request,user_id):
    user= request.user
    form=NewProfileForm()
@@ -93,7 +98,7 @@ def profile_edit(request,user_id):
          form=NewProfileForm()
    return render(request,'main/profile_edit.html',{"form":form})
 
-
+@login_required(login_url='login')
 def rate_post(request,pk):
    [design, usability, content]=[[0],[0],[0]]
 
@@ -194,12 +199,12 @@ def single_post(request, post_id):
 
 def search_results(request):
 
-    if 'search' in request.GET and request.GET["search"]:
-        search_term = request.GET.get("search")
-        searched_post = Post.search_by_name(search_term)
+    if "post" in request.GET and request.GET["post"]:
+        search_term = request.GET.get("post")
+        searched_posts = Post.search_by_name(search_term)
         message = f"{search_term}"
 
-        return render(request, 'main/search.html',{"message":message,"searched_post": searched_post})
+        return render(request, 'main/search.html',{"message":message,"searched_posts": searched_posts})
 
     else:
         message = "You haven't searched for any term"

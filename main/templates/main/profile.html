@@ -15,9 +15,46 @@
         <h5 class="text-center mt-3">{{user.username}}</h5>
         <p class="text-center">{{user.email}}</p>
       </div>
+      <hr>
       <div class="col-md-3"></div>
     </div>
-  </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-5">
+      {%for post in posts%}
+
+      <div class="col">
+        <div class="card">
+
+          {% if post.image %}
+          <img src="{{post.image.url}}" class="card-img-top" alt="Skyscrapers" />
+          {% endif %}
+          <div class="card-body">
+            <span style="display:flex;flex-direction:row; justify-content:space-around;width:60%; justify-content:baseline;">
+              <a class="mt-2" href="{%url 'single_post' post.id %}">
+                <p  style="color:rgb(13, 209, 209)">{{post.name}}</p>
+              </a>
+              <a
+              href="{{post.live_link}}"><button type="button" class="btn-outline-info">view</button></a>
+              </span>
+
+            <p class="card-text">
+            </p>
+            <div class="card-footer bg-white">
+
+
+              <!-- <small class="text-muted " >{{post.description}}</small> -->
+              <p class="card-text "><img class="rounded-circle nav-img" style="height: 30px; width: 30px"
+                  src="{{post.user_profile.profile.avatar.url}}" class="nav-img mr-2" alt="">
+                By {{post.user_profile.username}} <span style="float:right">{{post.date|date}}</span>
+              </p>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+      {%endfor%}
+    </div>
 
 
 {% endblock %}
