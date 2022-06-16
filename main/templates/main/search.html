@@ -2,7 +2,7 @@
 {% block content%}
 <div class="container">
 {% if searched_posts %}
-<h2>Found {{ searched_posts|length }} of searched term {{ message }}</h2>
+<h4 class="mt-4 p-2" style="border-bottom: 1px solid rgb(125, 120, 120); width:fit-content;">Found {{ searched_posts|length }} items of searched term {{ message }}</h4>
 {% else %}
 <h2> Found 0 projects for the search term {{ message }}. Have you searched by<br> project-title? Please try again.</h2>
 {% endif %}

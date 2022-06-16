@@ -3,14 +3,15 @@
 {%block content%}
 <div class="container" id="content">
   <div class="card mt-3" align="center">
-    <img src="{{post.image.url}}" style="height: 50rem" class="card-img-top" alt="Wild Landscape" />
+    
+    <img src="{{post.image.url}}" style="height: 50rem" class="card-img-top" alt="project image" />
     <div class="card-body">
       <div class="container">
         <div>
           <div class=" col d-flex justify-content-between">
             <div>
           <p> <b>{{post.name}}</b></p>
-          
+
           <p class="card-text" style="color:rgb(13, 209, 209)"><img class="rounded-circle nav-img" style="height: 30px; width: 30px;"
             src="{{post.user_profile.profile.avatar.url}}" class="nav-img mr-2" alt="">
           By {{post.user_profile.username}}

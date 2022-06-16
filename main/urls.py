@@ -20,6 +20,7 @@ urlpatterns = [
     path('rate/<pk>', views.rate_post, name='rate_post'),
     path('api/posts/', views.Postlist.as_view()),
     path('api/profile/', views.Profilelist.as_view()),
+    path('api_links/', views.api_links, name='api_links'),
 
 ]
 if settings.DEBUG:

@@ -2,7 +2,16 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
-<div class="hero-section"></div>
+<div class="hero-section">
+  <div class="hdiv">
+    <div class="bd1 text-center m-5"><p class="text-center mt-md-3">8<small class="tsmall">.97</small></p><small class="text-white" style="font-size:small;">DESIGN</small>
+      </div>
+    <div class="bd2 text-center m-5"><p class="text-center mt-md-3">9<small class="tsmall">.98</small></p><small class="text-white" style="font-size:small;">USABILITY</small></div>
+    <div class="bd3 text-center m-5"><p class="text-center mt-md-3">7<small class="tsmall">.21</small></p><small class="text-white" style="font-size:small;">CONTENT</small></div>
+
+  </div>
+
+</div>
 <!-- card -->
 
 <div class="container-fluid">
@@ -15,7 +24,12 @@
         <div class="card">
 
           {% if post.image %}
-          <img src="{{post.image.url}}" class="card-img-top" alt="Skyscrapers" />
+          {% if post.image.url %}
+
+          <img src="{{post.image.url}}" class="card-img-top" alt="user avatar" />
+          {%else%}
+          <img src="{% static 'images/default.jpg'%}" class="card-img-top" alt="user avatar" />
+          {% endif %}
           {% endif %}
           <div class="card-body">
             <span style="display:flex;flex-direction:row; justify-content:space-around;width:60%; justify-content:baseline;">
@@ -31,7 +45,7 @@
             <div class="card-footer bg-white">
 
 
-              <!-- <small class="text-muted " >{{post.description}}</small> -->
+              <small class="text-muted " >{{post.description}}</small>
               <p class="card-text "><img class="rounded-circle nav-img" style="height: 30px; width: 30px"
                   src="{{post.user_profile.profile.avatar.url}}" class="nav-img mr-2" alt="">
                 By {{post.user_profile.username}} <span style="float:right">{{post.date|date}}</span>

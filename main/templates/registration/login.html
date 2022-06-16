@@ -8,28 +8,28 @@
 
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div  style="margin-top:14%; padding:50px">
               <div class="card mb-3">
                 <div class="row g-0">
                   <div class="col-md-4">
                     <img
 
-                      src="{% static 'images/register2.svg'%}"
+                      src="{% static 'images/login.svg'%}"
                       alt="Trendy Pants and Shoes"
                       class="img-fluid rounded-start"
-                     
+
                     />
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
-                      <h5 class="card-title"><a>Sign in to continue</a> <span style="float:right">Not a member yet? <a
-                        href="{% url 'signup' %}" class="text-info">Register now</a></span></h5>
+                      <h5 class="card-title"><a>Sign in to continue.</a> <span class="m-1">Not a member yet? <a
+                        href="{% url 'signup' %}" style="color: #FF725E;">Register now</a></span></h5>
                 <div class="card-text">
                     <form action="" method="post" novalidate >
                         {% csrf_token%}
                         {{ form|crispy}}
-                        <button type="submit" class="btn btn-info btn-sm">Login</button>
+                        <button type="submit" class="btn btn-sm" style="background-color: #FF725E;">Login</button>
                     </form>
                 </div>
                     </div>
@@ -44,28 +44,5 @@
 
 </div>
 
-<!-- <div class="container">
 
-    <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <div class="card" style="margin-top:14%; padding:20px">
-                <div class="card-body">
-                    <h5 class="card-title"><a>Sign in to continue</a> <span style="float:right">Not a member yet? <a
-                            href="{% url 'signup' %}" class="text-info">Register now</a></span></h5>
-                    <div class="card-text">
-                        <form action="" method="post" novalidate >
-                            {% csrf_token%}
-                            {{ form|crispy}}
-                            <button type="submit" class="btn btn-info btn-sm">Login</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="col-md-2"></div>
-    </div>
-
-</div> -->
 {% endblock %}

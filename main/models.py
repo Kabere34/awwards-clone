@@ -55,3 +55,8 @@ class Ratings(models.Model):
     def save_comment(self):
         self.save()
 
+    @classmethod
+    def get_ratings(cls, id):
+        ratings = Ratings.objects.filter(post_id=id).all()
+        return ratings
+

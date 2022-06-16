@@ -1,4 +1,6 @@
 {% load crispy_forms_tags %}
+{%load static%}
+
 <html>
 
 <head>
@@ -45,26 +47,32 @@
 
 <body>
 
-</body>
 
-</html>
 <!-- end -->
+
+
+<!-- trial -->
+
 <nav class="navbar fixed-top navbar-expand-lg scrolling-navbar text-white" id="nbar"
-  style="background-color:black; height:5rem;">
+  style=height:5rem;">
   <div class="container">
-    <a class="navbar-brand" href="{% url 'index' %}">
-      <strong class="mr-4 brand text-white"> Awwwards</strong></a>
+
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
+
           <form class="form-inline" role="search" action="{%url 'search_results'%}">
 
             <div class="md-form my-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search" name="post" aria-label="Search" />
+
+              <input class="form-control mr-sm-2" type="text" placeholder="🔍" name="post" aria-label="Search" />
             </div>
           </form>
+
         </li>
+        <a class="navbar-brand" href="{% url 'index' %}">
+          <strong class=" brand text-black ml-4" style="font-family: 'Open Sans', sans-serif;"> awwards</strong></a>
       </ul>
 
       <ul class="navbar-nav navbar-right">
@@ -80,13 +88,14 @@
           <div class="dropdown-content">
             <a href="{% url 'profile' %}">Profile</a>
             <a href="{% url 'profile_edit' user.id %}">Edit Profile</a>
+            <a href="/api/profile ">api endpoints</a>
             <a href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
-            <a href="/api/profile ">link</a>
+
           </div>
         </div>
 
         <a
-        href="{% url 'new_post' %}"><button type="button" class="btn-info btn-sm mt-4 fw-light">Submit Your Site</button></a>
+        href="{% url 'new_post' %}"><button type="button" id="sub_btn" class="btn-info btn-sm mt-2 fw-light p-3" style="background-color:black;">Submit Your Site</button></a>
 
         {% else %}
         <a href="{% url 'signup' %}" class="login btn btn-sm btn-info m-1">
@@ -103,3 +112,8 @@
     </div>
   </div>
 </nav>
+
+
+</body>
+
+</html>

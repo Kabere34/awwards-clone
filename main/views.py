@@ -1,7 +1,7 @@
 from multiprocessing import context
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render,redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login as user_login, authenticate
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -21,7 +21,7 @@ def signup(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
-            login(request, user)
+            user_login(request, user)
             return redirect('login')
     else:
         form = SignupForm()
@@ -183,20 +183,6 @@ def single_post(request, post_id):
     return render (request, 'main/single_post.html',context)
 
 
-
-# def search_results(request):
-#    post= Post.objects.all()
-#    query=request.GET.get('query')
-#    if query:
-#       image=Post.objects.filter( Q(name__icontains=query))
-#       # profile=Profile.objects.filter( Q(user__username__icontains=query) )
-#       params = {
-#           'image': image,
-
-#           'post':post
-#       }
-#       return render(request, 'main/search.html', params)
-
 def search_results(request):
 
     if "post" in request.GET and request.GET["post"]:
@@ -209,7 +195,10 @@ def search_results(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'main/search.html',{"message":message})
-
+     
+@login_required(login_url='login')
+def api_links(request):
+   return render(request,'main/api_links.html')
 
 class Postlist(APIView):
     def get(self, request, format=None):

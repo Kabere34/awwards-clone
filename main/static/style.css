@@ -1,25 +1,33 @@
 body { padding-top: 70px;
-  background-color: rgb(243, 241, 232);
+
 
 }
 @media screen and (max-width: 768px) {
     body { padding-top: 0px; }
 }
 .hero-section{
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url("./images/hero3m.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),url("./images/hero5.jpg");
   height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
-
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+.hdiv{
+ display: flex;
+ flex-direction: row;
+ justify-content: center;
+}
+
 #content{
   width: 80%;
   margin: auto;
 
 }
 #nbar{
-  background-color: rgb(55, 52, 52);
+  background-color: white;
+  color: black;
 }
 #text,#ratep{
   border: none;
@@ -53,4 +61,34 @@ body { padding-top: 70px;
 #site{
   border: none !important;
 }
+#sub_btn{
+border: none !important;
 
+}
+
+#apbt{
+  background-color:#FDB5AC ;
+}
+.bd3,.bd2,.bd1 {
+  height: 80px;
+  width: 80px;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 50%; /* may require vendor prefixes */
+  font-size: 28px;
+  font-weight: 600;
+
+}
+.bd1{
+  border-right: 3px solid #39f2f9;
+  border-bottom: 3px solid #f88f52;
+}
+.bd2{
+  border-right: 3px solid #39f2f9;
+  border-bottom: 3px solid #65f96e;
+}
+.bd3{
+  border-right: 3px solid #39f2f9;
+  border-bottom: 3px solid #e65a86;
+}
