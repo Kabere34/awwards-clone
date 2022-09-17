@@ -17,9 +17,7 @@ Users can sign up, login, view and post projects, search and rate other users' p
  ###### user profile
  <img src="">
 
-###### user credentials
- username- daisymacharia
- password- 0717579032
+
 
 ## User Story
 
